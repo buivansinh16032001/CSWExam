@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-10">
+            <br><br>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thread>
+                        <tr class="active">
+                            <th>id</th>
+                            <th>name</th>
+                            <th>price</th>
+                            <th>quantity</th>
+                        </tr>
+                    </thread>
+                    <tbody id = "list_products">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        loadProducts();
+    })
+    function loadProducts() {
+        $.ajax({
+            type: "GET",
+            url: "/listProduct",
+            datatype: 'json',
+            success: function(data){
+                    $('#list_products').append(
+                        '<tr id="tr'['id']+'">' +
+                        '<td>'['id'] + '</td>' +
+                        '<td>'['name'] + '</td>' +
+                        '<td>'['price'] + '</td>' +
+                        '<td>'['quantity'] + '</td>'+
+                        '</tr>'
+                    );
+            },
+            error: function(error){
+                alert(error);
+            }
+        }).done()
+    }
+</script>
+</body>
+</html>
